@@ -1,4 +1,4 @@
-import { useTheme } from "../../hooks/useTheme"
+import { useTheme } from "../hooks/useTheme"
 import { HiMiniSun, HiMiniMoon } from "react-icons/hi2"
 import { GiRunningNinja } from "react-icons/gi";
 import { SiGithub } from "react-icons/si"
