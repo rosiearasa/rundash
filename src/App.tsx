@@ -13,10 +13,6 @@ function App() {
   <ActivityProvider>
   <DashBoard/>
   </ActivityProvider>
-
-
-
-
 </Layout>
       
     </>
