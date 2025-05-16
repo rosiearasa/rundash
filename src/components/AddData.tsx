@@ -1,7 +1,6 @@
 import { Button } from "./ui/button"
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useActivity } from "../contexts/ActivityContext";
-import { Textarea } from "./ui/textarea";
 import {
   Dialog,
   DialogContent,
@@ -14,12 +13,21 @@ import {
 const AddData = () => {
   const { importCSV } = useActivity();
   const [csvInput, setCsvInput] = useState("");
+  const [displayValue, setDisplayValue] = useState('');
 
   const handleImport = () => {
     if (csvInput.trim()) {
       importCSV(csvInput);
     }
   };
+  useEffect(() => {
+    // If input is longer than 500 characters, truncate with ellipsis
+    if (csvInput.length > 500) {
+      setDisplayValue(csvInput.substring(0, 500) + '...');
+    } else {
+      setDisplayValue(csvInput);
+    }
+  }, [csvInput]);
 
   return (
     <div className="flex flex-col items-end justify-start">
@@ -35,12 +43,18 @@ const AddData = () => {
             <p className="text-sm text-muted-foreground">
               Paste your Garmin CSV data below. Each row should contain activity data.
             </p>
-            <Textarea
-              placeholder="Paste CSV data here..."
-              value={csvInput}
-              onChange={(e) => setCsvInput(e.target.value)}
-              className="min-h-[200px]"
-            />
+            <div className="relative">
+              <textarea
+                placeholder="Paste CSV data here..."
+                value={displayValue}
+                onChange={(e) => setCsvInput(e.target.value)}
+                className="min-h-[200px] w-full resize-none rounded-md border p-2"
+              />
+              {csvInput.length > 500 && (
+                <div className="absolute bottom-2 right-2 bg-white dark:bg-gray-800 text-xs px-2 py-1 rounded-md opacity-80">
+                  {csvInput.length} characters
+                </div>   )}
+                </div>
             <Button onClick={handleImport}>Import Garmin Data</Button>
           </div>
         </DialogContent>
