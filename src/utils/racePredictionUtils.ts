@@ -17,7 +17,7 @@ export const predictRaceTime = (
 // Get the most recent activities with valid data for predictions
 export const getRecentActivitiesForPrediction = (
   activities: Activity[],
-  count: number = 3
+  count: number = 2
 ): Activity[] => {
   // Filter activities to include only those with valid distance and time
   return activities
