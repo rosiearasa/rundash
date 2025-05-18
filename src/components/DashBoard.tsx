@@ -3,6 +3,7 @@ import { Calendar, Activity, Clock, Heart } from "lucide-react";
 import AddData from "./AddData";
 import { PaceTrendChart } from "./PaceTrendChart";
 import { useActivity } from "../contexts/ActivityContext";
+import { RacePredictions } from "./RacePredictions";
 import {
   calculateWeeklySummary,
   calculateAveragePace,
@@ -24,6 +25,9 @@ const DashBoard = () => {
           <p>
             Understand your running metrics, become a running Ninja. Start by
             uploading your data as a CSV...
+          </p>
+          <p>
+           Simply copy and paste the data exported from Garmin csv for running activity omit the first title row
           </p>
         </div>
         <AddData />
@@ -62,6 +66,10 @@ const DashBoard = () => {
 
       <div>
         <PaceTrendChart activities={activities} />
+      </div>
+        
+        <div className="grid grid-cols-1 gap-6 mb-6">
+        <RacePredictions activities={activities} />
       </div>
       <div>
         <WeeklyDistanceChart activities={activities} />
